@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  ==========Chapter 5 ref:DOM에 이름 달기==========
+
+  일반 HTML에서 DOM 요소에 이름을 달 때는 id를 사용함.
+
+  특정 DOM 요소에 어떤 작업을 해야 할 때 이렇게 요소에 id를 달면
+  CSS에서 특정 id에 특정 스타일을 적용하거나, 자바스크립트에서 해당 id를 가진 요소를 찾아서 작업할 수 있음.
+
+  아래에도 id="root"인 div가 존재함.
+
+  그리고 src/index.js 파일 내에는 id가 root인 요소에 리액트 컴포넌트를 렌더링 하나는 코드가 있음
+  (...)
+  ReactDOM.render(<App />, document.getElementById('root'));
+
+  이렇게 HTML에서 id를 사용하여 DOM에 이름을 다는 것처럼
+  리액트 프로젝트 내부에서 DOM에 이름을 다는 방법이 있음
+  이를 ref(reference의 줄임말) 개념이라고 함.
+
+  **
+    리액트 컴포넌트 안에서도 id를 사용할 수는 있지만, JSX 안에서 DOM에 id를 달면
+    해당 DOM을 렌더링할 때 그대로 전달됨. => 특수한 경우가 아니면 권장하지 않음.
+    예를 들어, 같은 컴포넌트를 여러 번 사용한다고 가정하면, HTML에서 DOM의 id는 유일(unique)해야 하는데,
+    이런 상황에서는 중복 id를 가진 DOM이 여러 개 생기니 잘못된 사용.
+
+    ref는 전역적으로 작동하지 않고 컴포넌트 내부에서만 작동하기 때문에 이런 문제가 생기지 않음.
+
+    대부분은 id를 사용하지 않고도 원하는 기능을 구현할 수 있지만, 다른 라이브러리나 프레임워크와 함께
+    id를 사용해야 하는 상황이 발생할 수 있으므로 이런 상황에서는 컴포넌트를 만들 때마다
+    id 뒷부분에 추가 텍스트를 붙여서 (example: button01 button02 button03...)
+    중복 id가 발생하는 것을 방지해야 함.
+  **
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
