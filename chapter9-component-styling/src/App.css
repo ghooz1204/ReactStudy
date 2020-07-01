@@ -1,0 +1,73 @@
+/*
+==========Chapter 9.1.1==========
+  이름 짓는 규칙
+
+  프로젝트에 자동 생성된 App.css에는 클래스 이름이 컴포넌트 이름-클래스 형태로 지어짐.
+  클래스 이름에 컴포넌트를 포함시킴으로써 다른 컴포넌트에서 실수로 중복되는 클래스를 만들어 사용하는 것을 방지할 수 있음.
+
+  비슷한 방식으로 BEM 네이밍(BEM Naming)이라는 방식도 존재.
+  이 방식은 이름을 지을 때 일종의 규칙을 준수하여 해당 클래스가 어디에서
+  어떤 용도로 사용되는지 명확하게 작성하는 방식
+  Example) .card_title-primary
+*/
+
+.App {
+  text-align: center;
+}
+/*
+==========Chapter 9.1.2==========
+  CSS Selector
+
+  CSS Selector를 사용하면 CSS 클래스가 특정 클래스
+  내부에 있는 경우에만 스타일을 적용할 수 있음.
+
+  Example)
+    .App .logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 40vmin;
+    }
+    .App 안에 들어있는 .logo에 스타일을 적용하고 싶다면 위와 같이 작성.
+*/
+
+/* .App 안에 들어있는 .logo */
+.App .logo {
+  height: 40vmin;
+  pointer-events: none;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+
+/*
+  .App 안에 들어있는 header
+  header 클래스가 아닌 header 태그 자체에
+  스타일을 적용하기 때문에 .이 생략되었음.
+*/
+.App header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* .App 안에 들어 있는 a 태그 */
+.App a {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*
+  이런 식으로 컴포넌트의 최상위 html 요소에는 컴포넌트의 이름으로 클래스 이름을 짓고(.App)
+  그 내부에서는 소문자를 입력하거나(.logo), header 같은 태그를 사용하여 클래스 이름이
+  불필요한 경우에는 아예 생략할 수도 있음.
+*/
