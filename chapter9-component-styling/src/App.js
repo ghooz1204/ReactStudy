@@ -1,7 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SassComponent from './SassComponent';
+import CSSModule from './CSSModule/CSSModule';
+import StyledComponent from './StyledComponent';
+import MediaStyledComponent from './MediaStyledComponent';
 
 /*
 ==========Chapter 9==========
@@ -34,8 +36,19 @@ function App() {
   return (
     <div className="App">
       <SassComponent />
+      <CSSModule />
+      <StyledComponent />
+      <MediaStyledComponent />
     </div>
   );
 }
 
 export default App;
+
+/*
+==========Chapter 9.6==========
+  정리
+  
+  다양한 리액트 컴포넌트 스타일링 방식이 있지만, 모두 쓸모 있는 기술이므로
+  이러한 방식들 중 무엇을 사용할 지는 개발자의 몫.
+*/

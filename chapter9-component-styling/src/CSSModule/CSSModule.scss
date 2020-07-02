@@ -1,0 +1,27 @@
+/*
+==========Chapter 9.3.3==========
+    CSS Module이 아닌 파일에서 CSS Module 사용하기
+
+    :local을 사용하여 CSS Module을 작성할 수 있음.
+*/
+.something {
+    font-weight: 800;
+    color: aqua;
+}
+
+:local {
+    .wrapper {
+        background: black;
+        padding: 1rem;
+        color: white;
+        font-size: 2rem;
+        &.inverted {
+            color: black;
+            background: white;
+            border: 1px solid black;
+            &::after {
+                content: 'scss 파일';
+            }
+        }
+    }    
+}

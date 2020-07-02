@@ -7,6 +7,38 @@
 
     다른 scss파일을 불러올 때는 @import 구문을 사용함.
 */
+
+/*
+==========Chapter 9.2.3==========
+    node_modules에서 라이브러리 불러오기
+
+    Sass의 장점 중 하나는 라이브러리를 쉽게 불러와서 사용할 수 있다는 점.
+    yarn을 통해 설치한 라이브러리를 사용하는 가장 기본적인 방법은
+    상대경로를 사용하여 node_nodules까지 들어가서 불러오는 방법.
+    Example) @import '../../../node_modules/library/styles';
+
+    하지만 이런 구조는 스타일 파일이 깊숙한 디렉터리에 위치할 경우
+    ../를 매우 많이 먹어야하는 번거로움 존재.
+    이때 물결 문자(~)를 사용하면 자동으로 node_modules에서 라이브러리 디렉터리를 탐지함
+    Example) @import '~library/styles';
+
+    연습을 위해 반응형 디자인을 쉽게 만들어 주는 include-media와
+    매우 편리한 색상 팔레트인 open-color를 설치하여 사용해봄.
+
+    yarn add open-color include-media
+*/
+
+@import '~include-media/dist/include-media';
+@import '~open-color/open-color';
+// 물결 표시를 이용하여 라이브러리를 불러옴.
+/*
+    Sass 라이브러리를 불러올 때는 node_modules 내부 라이브러리 경로 안에 들어 있는
+    scss 파일을 불러와야 함.
+    보통 scss 파일 경로가 어디에 위치하고 있는지 라이브러리의 공식 메뉴얼에서
+    알려주지 않을 때가 많으니, 직접 경로로 들어가서 확인해야 함.
+*/
+
+
 // 변수 사용하기
 $red: #fa5252;
 $orange: #fd7e14;

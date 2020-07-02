@@ -1,0 +1,83 @@
+==========Chapter 9.2.2==========
+  sass-loader 설정 커스터마이징하기
+
+  이 작업은 Sass를 사용할 때 반드시 해야 하는 것은 아니지만 해 두면 유용함.
+  예를 들어 앞서 SassComponent에서 utils를 불러올 때 @import './styles/utils'; 형태로 불러왔는데,
+  만약 프로젝트에 디렉터리를 많이 만들어서 구조가 깊어졌다면 상위 폴더로 한참 거슬러 올라가야 한다는 단점 존재.
+  Example)
+    @import '../../../styles/utils';
+
+  이 문제점은 웹팩에서 sass를 처리하는 sass-loader의 설정을 커스터마이징하여 해결할 수 있음.
+
+  create-react-app으로 만든 프로젝트는 프로젝트 구조의 복잡도를 낮추기 위해 세부 설정이 모두 숨겨져있음.
+  이를 커스터마이징 하려면 yarn eject 명령어를 통해 세부 설정을 밖으로 꺼내주어야 함.
+  
+  **
+    create-react-app에는 기본적으로 git이 설정되어 있고, yarn eject는 git에 커밋되지 않은 변화가 있다면
+    진행되지 않으니, 먼저 커밋해주어야 함.
+  **
+
+  ==> yarn eject
+
+  이 명령을 실행하면 프로젝트 디렉터리에 config라는 디렉터리가 생성됨.
+  
+  그 디렉터리 안에 있는 webpack.config.js 파일을 열고 "sassRegex"라는 키워드를 찾은 후,
+  {
+    test: sassRegex,
+    exclude: sassModuleRegex,
+    use: getStyleLoaders(
+      {
+        importLoaders: 2,
+        sourceMap: isEnvProduction && shouldUseSourceMap,
+      },
+      'sass-loader'
+    ),
+    sideEffects: true,
+  },
+  여기서 use: 에 있는 'sass-loader' 부분을 지우고, 뒷부분에 concat을 통해 커스터마이징된 sass-loader 설정을 넣어줌.
+
+  {
+    test: sassRegex,
+    exclude: sassModuleRegex,
+    use: getStyleLoaders({
+      importLoaders: 2,
+      sourceMap: isEnvProduction && shouldUseSourceMap,
+    }).concat({
+      loader: require.resolve('sass-loader'),
+      options: {
+        sassOptions: {
+          includePaths: [paths.appSrc + '/styles'],
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+        },
+      }
+    }),
+    sideEffects: true,
+  },
+  설정 파일을 저장한 후, 서버를 껏다가 재시작하면 utils.scss 파일을 불러올 때 현재 수정하고 있는 scss 파일의 경로가
+  어디에 위치하더라도 앞부분에 상대 경로를 입력할 필요 없이 styles 디렉터리 기준 절대 경로를 사용하여 불러올 수 있음.
+
+  하지만 새 파일을 생성할 때마다 utils.scss를 매번 포함시키는 것도 귀찮을 수 있음.
+  그럴 때는 sass-loader의 data 옵션을 설정하면 됨.
+  data 옵션을 설정하면 Sass 파일을 불러올 때마다 코드의 맨 윗부분에 특정 코드를 포함시켜 줌.
+
+  {
+    test: sassRegex,
+    exclude: sassModuleRegex,
+    use: getStyleLoaders({
+      importLoaders: 2,
+      sourceMap: isEnvProduction && shouldUseSourceMap,
+    }).concat({
+      loader: require.resolve('sass-loader'),
+      options: {
+        sassOptions: {
+          includePaths: [paths.appSrc + '/styles'],
+          sourceMap: isEnvProduction && shouldUseSourceMap,
+        },
+        prependData: `@import 'utils';`
+      }
+    }),
+    sideEffects: true,
+  },
+
+  이렇게 작성하고 개발 서버를 재시작하고 나면 모든 scss 파일에서 utils.scss를 자동으로 불러오므로,
+  Sass에서 맨 윗줄에 있는 import 구문을 지워도 정상적으로 작동하게 됨.
