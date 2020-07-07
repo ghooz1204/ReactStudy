@@ -1,5 +1,5 @@
 {
-  "name": "chapter3-component",
+  "name": "chapter12_use-immer-for-immutability",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
