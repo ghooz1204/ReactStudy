@@ -1,0 +1,15 @@
+/*
+==========Chapter 16.2.2==========
+    간단한 UI 구성하기
+*/
+
+.toggle {
+    border: 2px solid black;
+    width: 64px; height: 64px;
+    border-radius: 32px;
+    box-sizing: border-box;
+}
+
+.toggle.active {
+    background: yellow;
+}
