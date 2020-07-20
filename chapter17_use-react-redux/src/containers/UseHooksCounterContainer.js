@@ -29,7 +29,7 @@ import { increase, decrease } from '../modules/useReduxActionCounter';
 
 const CounterContainer = () => {
     /*
-        현재는 숫자가 바뀌어서 컴포넌트가 리렌더링될 때마다 onIncrease 함수와 onDecreaseㅎ 함수가 새롭게 생성되고 있음.
+        현재는 숫자가 바뀌어서 컴포넌트가 리렌더링될 때마다 onIncrease 함수와 onDecrease 함수가 새롭게 생성되고 있음.
         만약 컴포넌트 성능을 최적화해야 하는 상황이 온다면 useCallback으로 액션을 디스패치 하는 함수를 감싸주는 것이 좋음.
     */
     const number = useSelector(state => state.counter.number);

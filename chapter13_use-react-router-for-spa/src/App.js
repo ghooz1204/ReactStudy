@@ -85,7 +85,7 @@ import HistorySample from './HistorySample';
 
   Link 컴포넌트를 사용하여 페이지를 전환하면, 페이지를 새로 불러오지 않고 애플리케이션은 그대로 유지한 상태에서
   HTML5 History API를 사용하여 페이지의 주소만 변경해 줌.
-  Link 컴포넌트 자체는 a 태그로 이루어져 있지만, 페이지 전환을 방지하는 기장이 내장되어 있음.
+  Link 컴포넌트 자체는 a 태그로 이루어져 있지만, 페이지 전환을 방지하는 기능이 내장되어 있음.
 
   Example) <Link to="주소">내용</Link>
 */

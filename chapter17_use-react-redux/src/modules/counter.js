@@ -45,7 +45,7 @@ export const decrease = () => ({ type: DECREASE });
     초기 상태 및 리듀서 함수 만들기
 
     이 모듈의 초기 상태는 number 값을 설정해 주고, 리듀서 함수에는 현재 상태를 참조하여 새로운 객체를 생성해서 반환하는 코드 작성.
-    마지막으로 export default라는 키워드르 ㄹ통해 함수를 내보내 주었음.
+    마지막으로 export default라는 키워드를 통해 함수를 내보내 주었음.
     **
         export와 export default의 차이점.
 
