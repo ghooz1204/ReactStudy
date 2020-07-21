@@ -1,0 +1,2 @@
+(this["webpackJsonpchapter19_code-splittubg"]=this["webpackJsonpchapter19_code-splittubg"]||[]).push([[4],{24:function(t,c,e){"use strict";function n(){alert("\uc778\ub155\ud558\uc138\uc694!")}e.r(c),e.d(c,"default",(function(){return n}))}}]);
+//# sourceMappingURL=4.868112d3.chunk.js.map

@@ -1,14 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import loadable from '@loadable/component';
+
 import Menu from './components/Menu';
-import RedPage from './pages/RedPage';
-import BluePage from './pages/BluePage';
+// import RedPage from './pages/RedPage';
+// import BluePage from './pages/BluePage';
+// import UsersPage from './pages/UsersPage';
 
 /*
-=========Chapter 20=========
+==========Chapter 20==========
     서버 사이드 렌더링
 
-=========Chapter 20.1=========
+==========Chapter 20.1==========
     서버 사이드 렌더링의 이해
 
     "서버 사이드 렌더링"은 UI를 서버에서 렌더링하는 것을 의미함.
@@ -20,7 +23,7 @@ import BluePage from './pages/BluePage';
     서버사이드 렌더링을 구현하면 사용자가 웹 서비스에 방문했을 때 서버 쪽에서 초기 렌더링을 대신해 줌,
     그리고 사용자가 html을 전달받을 때 그 내부에 렌더링된 결과물이 보임.
 
-=========Chapter 20.1.1=========
+==========Chapter 20.1.1==========
     서버 사이드 렌더링의 장점
 
     * 구글, 네이버, 다음 등의 검색 엔진이 웹 애플리케이션의 페이지를 원할하게 수집할 수 있음.
@@ -36,7 +39,7 @@ import BluePage from './pages/BluePage';
     반면 서버 사이드 렌더링을 구현한 웹 페이지라면 자바스크립트 파일 다운로드가 완료되지 않은 시점에도
     html 상에 사용자가 볼 수 있는 콘텐츠가 있기 때문에 대기 시간이 최소화되고, 사용자 경험도 향상됨.
 
-=========Chapter 20.1.2=========
+==========Chapter 20.1.2==========
     서버 사이드 렌더링의 단점
 
     * 원래 브라우저가 해야할 일을 서버가 대신 처리하는 것이므로 서버 리소스가 사용된다는 단점.
@@ -46,7 +49,7 @@ import BluePage from './pages/BluePage';
     * 프로젝트의 구조가 복잡해질 수 있고, 데이터 미리 불러오기,
     코드 스플리팅과의 호환 등 고려해야 할 사항이 많아져서 개발이 어려워짐.
 
-=========Chapter 20.1.3=========
+==========Chapter 20.1.3==========
     서버 사이드 렌더링과 코드 스플리팅 충돌
 
     서버 사이드 렌더링과 코드 스플리팅을 함께 적용하면 작업이 꽤 까다로움.
@@ -64,6 +67,29 @@ import BluePage from './pages/BluePage';
     필요한 파일의 경로를 추출하여 렌더링 결과에 스크립트/스타일 태그를 삽입해 주는 방법.
 */
 
+/*
+
+==========Chapter 20.5==========
+    서버 사이드 렌더링과 코드 스플리팅
+
+    리액트에서 공식적으로 제공하는 코드 스플리팅 기능인 React.lazy와 Suspense는 서버 사이드 렌더링을 지원하지 않음.
+    리액트 공식 메뉴얼에서도 서버 사이드 렌더링과 코드 스플리팅을 함께 사용할 때는 Loadable Components를 권장하고 있음.
+
+    Loadable Components에서는 서버 사이드 렌더링을 할 때 필요한 서버 유틸 함수와 웹팩 플러그인, babel 플러그인을 제공해 줌.
+
+    $ yarn add @loadable/component @loadable/server @loadable/webpack-plugin @loadable/babel-plugin
+    명령어를 통해 서버 사이드 렌더링 시 중요한 역할을 하는 라이브러리 다운로드.
+
+==========Chapter 20.5.1==========
+    라우트 컴포넌트 스플리팅하기
+
+    인터넷 속도를 늦추고 테스트를 하면, 페이지가 처음에 나타났다가, 사라졌다가, 다시 나타나게 됨.
+    깜박임 현상이 발생하는데, 이는 빠른 인터넷 환경의 사용자는 느끼지 못할 수도 있지만, 느린 인터넷 환경 사용자에겐 매우 불쾌한 사용자 경험 제공.
+*/
+const RedPage = loadable(() => import('./pages/RedPage'));
+const BluePage = loadable(() => import('./pages/BluePage'));
+const UsersPage = loadable(() => import('./pages/UsersPage'));
+
 function App() {
     return (
         <div className="App">
@@ -71,8 +97,54 @@ function App() {
             <hr />
             <Route path="/red" component={RedPage} />
             <Route path="/blue" component={BluePage} />
+            <Route path="/users" component={UsersPage} />
         </div>
     );
 }
 
 export default App;
+
+/*
+==========Chapter 20.6==========
+    서버 사이드 렌더링의 환경 구축을 위한 대안
+
+    서버 사이드 렌더링 자체만 놓고 보면 꽤나 간단한 작업이지만
+    데이터 로딩, 코드 스플리팅까지 하면 참 번거로운 작업.
+
+==========Chapter 20.6.1==========
+    Next.js
+
+    Next.js(https://nextjs.org)라는 리액트 프레임워크를 사용하면
+    이 작업을 최소한의 설정으로 간단하게 처리할 수 있음. => 그 대신 몇 가지 제한 사항.
+    
+    가장 대표적으로 리액트 라우터와 호환되지 않는 점.
+    리액트 관련 라우터 라이브러리 중 리액트 라우터가 가장 점유율이 높은데 호환되지 않는 것은 꽤나 치명적인 단점.
+    호환되지 않기 때문에 이미 작성된 프로젝트에 적용하는 것은 매우 까다로움.
+    그리고 리액트 라우터는 컴포넌트 기반으로 라우트를 설정하는 반면에 Next.js는 파일 시스템에 기반하여 라우트를 설정함.
+    컴포넌트 파일의 경로와 파일 이름을 사용하여 라우트를 설정하는 것.
+    그 외에도 복잡한 작업들을 모두 Next.js가 대신해 주기 때문에 실제 작동 원리를 파악하기 힘들어질 수도 있음.
+
+    코드 스플리팅, 데이터 로딩, 사바 사이드 렌더링을 가장 쉽게 적용하고 싶다면 Next.js를 사용하는 것을 추천.
+    
+    하지만 Next.js의 라우팅 방식보다 리액트 라우터의 라우팅 방식을 더 좋아하거나,
+    기존 프로젝트에 적용해야 하거아, 혹은 작동 원리를 제대로 파악하면서 구현하고 싶다면 직접 구현하는 것이 좋음.
+
+==========Chapter 20.6.2==========
+    Razzle
+
+    Razzle(https://github.com/jaredpalmer/razzle) 또한 Next.js처럼 서버 사이드 렌더링을
+    쉽게 할 수 있도록 해 주는 도구이며, 프로젝트 구성이 CRA와 매우 유사하다는 장점이 있음.
+    그렇기 때문에 프로젝트의 구조를 쉽게 변경할 수 있고, 리액트 라우터와도 호환이 잘 됨.
+
+    하지만 코드 스플리팅 시 발생하는 깜박임 현상을 해결하는 것이 어렵다는 단점이있음.
+    이 프로젝트에서 Loadable Components를 적용하는 것이 불가능하지는 않지만,
+    최신 버전의 Loadable Components가 기본 설정으로는 작동하지 않아서 적용하기가 까다로움.
+
+==========Chapter 20.7==========
+    정리
+
+    서버 사이드 렌더링은 프로젝트를 만들 때 꼭 해야 하는 작업은 아님.
+    하지만 서비스 이용자가 많아지고, 검색 엔진 최적화 및 사용자 경험을 향상시켜야 한다면
+    도입을 고려해 볼 만한 가치가 있는 기술.
+    단, 이를 도입하면 프로젝트가 조금 복잡해질 수 있음.
+*/

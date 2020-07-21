@@ -1,0 +1,2 @@
+(this["webpackJsonpchapter19_code-splittubg"]=this["webpackJsonpchapter19_code-splittubg"]||[]).push([[0],{25:function(t,e,c){"use strict";c.r(e);var n=c(0),p=c.n(n);e.default=function(){return p.a.createElement("div",null,"SplitMe")}}}]);
+//# sourceMappingURL=0.db98317e.chunk.js.map
