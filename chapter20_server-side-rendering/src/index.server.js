@@ -4,7 +4,6 @@ import express from 'express';
 import { StaticRouter } from 'react-router-dom';
 import App from './App';
 import path from 'path';
-import fs from 'fs';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';

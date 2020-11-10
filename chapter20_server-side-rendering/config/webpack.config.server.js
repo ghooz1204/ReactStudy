@@ -1,4 +1,3 @@
-const path = require('./paths');
 const paths = require('./paths');
 
 /*

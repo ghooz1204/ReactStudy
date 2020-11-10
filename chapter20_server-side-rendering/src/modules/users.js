@@ -11,7 +11,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com/users';
     Example) 페이지에서 필요로 하는 데이터가 있다면 API를 요청해서 응답을 받아 와야 함.
 
     일반적인 브라우저 환경에서는 API를 요청하고 응답을 받아 와서 리액트 state 혹은 리덕스 스토어에 넣으면 자동으로 리렌더링 됨.
-    하지만 서버의 경우 문자열 형태로 렌더링하는 겅시므로 state나 리덕스 스토어의 상태가 바뀐다고 해서 자동으로 리렌더링 되지 않음.
+    하지만 서버의 경우 문자열 형태로 렌더링하는 것이므로 state나 리덕스 스토어의 상태가 바뀐다고 해서 자동으로 리렌더링 되지 않음.
     => 그 대신 renderToString 함수를 한 번 더 호출해 주어야 함.
     게다가 서버에서는 componentDidMoune 같은 라이프 사이클 API도 사용 불가.
 
@@ -30,7 +30,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com/users';
 const GET_USERS_PENDING = 'users/GET_USERS_PENDING';
 const GET_USERS_SUCCESS = 'users/GET_USERS_SUCCESS';
 const GET_USERS_FAILURE = 'users/GET_USERS_FAILURE';
-
+ 
 /*
 ==========Chapter 20.4.6==========
     redux-saga 코드 준비하기
